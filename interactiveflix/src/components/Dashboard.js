@@ -3,7 +3,7 @@ import { useAuth } from "./AuthContext";
 import { getIdToken } from "firebase/auth";
 
 const Dashboard = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, role } = useAuth();
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -11,11 +11,11 @@ const Dashboard = () => {
       if (currentUser) {
         try {
           const token = await getIdToken(currentUser);
-          console.log("Token:", token);
-          const response = await fetch("http://localhost:5245/videometa", {
+          const response = await fetch("http://localhost:5245/get/review", {
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
+              "X-User-Role": role,
             },
           });
 
@@ -45,7 +45,7 @@ const Dashboard = () => {
     };
 
     fetchUserData();
-  }, [currentUser]);
+  }, [currentUser, role]);
 
   return (
     <div>
