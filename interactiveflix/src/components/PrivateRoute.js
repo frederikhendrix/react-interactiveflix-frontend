@@ -3,14 +3,15 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 const PrivateRoute = ({ children, roles }) => {
-  const { currentUser } = useAuth();
+  const { currentUser, role } = useAuth();
 
   if (!currentUser) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
-  // Add your logic to check for user roles here
-  // Example: if (!roles.includes(currentUser.role)) { return <Navigate to="/unauthorized" />; }
+  if (!roles.includes(role)) {
+    return <Navigate to="/" />;
+  }
 
   return children;
 };

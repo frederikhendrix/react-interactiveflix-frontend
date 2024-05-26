@@ -9,10 +9,19 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState("User");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
+      if (user) {
+        const providerId = user.providerData[0].providerId;
+        if (providerId === "google.com") {
+          setRole("Admin");
+        } else if (providerId === "password") {
+          setRole("User");
+        }
+      }
       setLoading(false);
     });
 
@@ -21,6 +30,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     currentUser,
+    role,
   };
 
   return (

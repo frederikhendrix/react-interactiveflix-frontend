@@ -5,6 +5,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import LoginPage from "./components/LoginPage";
 import Dashboard from "./components/Dashboard";
 import AdminPage from "./components/AdminPage";
+import SignUpPage from "./components/SignUpPage";
 
 function App() {
   return (
@@ -13,10 +14,12 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+
             <Route
               path="/dashboard"
               element={
-                <PrivateRoute roles={["User", "Admin", "Moderator"]}>
+                <PrivateRoute roles={["User", "Admin"]}>
                   <Dashboard />
                 </PrivateRoute>
               }
