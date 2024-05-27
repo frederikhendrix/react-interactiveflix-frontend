@@ -26,4 +26,10 @@ jobs:
     - name: Log in to DockerHub
       uses: docker/login-action@v2
       with:
-        username: ${{ secrets.DOCKERH
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Push Docker image to DockerHub
+      run: |
+        docker tag react-frontend-service:latest ${{ secrets.DOCKERHUB_USERNAME }}/react-frontend-service:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/react-frontend-service:latest
