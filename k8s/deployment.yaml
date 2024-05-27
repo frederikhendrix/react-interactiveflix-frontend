@@ -14,6 +14,32 @@ spec:
     spec:
       containers:
         - name: react-frontend-service
-          image: rikhendrix/react-frontend-service:latest
+          image: your-dockerhub-username/your-app-name:latest
           ports:
             - containerPort: 80
+          env:
+            - name: REACT_APP_FIREBASE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: firebase-secrets
+                  key: REACT_APP_FIREBASE_API_KEY
+            - name: REACT_APP_FIREBASE_AUTH_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: firebase-secrets
+                  key: REACT_APP_FIREBASE_AUTH_DOMAIN
+            - name: REACT_APP_FIREBASE_PROJECT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: firebase-secrets
+                  key: REACT_APP_FIREBASE_PROJECT_ID
+            - name: REACT_APP_FIREBASE_STORAGE_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: firebase-secrets
+                  key: REACT_APP_FIREBASE_STORAGE_BUCKET
+            - name: REACT_APP_FIREBASE_MESSAGING_SENDER_ID
+              valueFrom:
+                secretKeyRef:
+                  name: firebase-secrets
+                  key: REACT_APP_FIREBASE_MESSAGING_SENDER_ID
