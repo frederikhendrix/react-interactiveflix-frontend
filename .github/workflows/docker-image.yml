@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Change to interactiveflix directory
-      run: cd interactiveflix
+      run: cd ../../interactiveflix
 
     - name: Build the Docker image
       run: docker build ./interactiveflix --file Dockerfile --tag react-frontend-service:latest
