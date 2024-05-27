@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: interactive-flix-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: interactive-flix-frontend
+  template:
+    metadata:
+      labels:
+        app: interactive-flix-frontend
+    spec:
+      containers:
+        - name: interactive-flix-frontend
+          image: rikhendrix/interactive-flix-frontend:latest
+          ports:
+            - containerPort: 80
