@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: react-frontend-service
-          image: your-dockerhub-username/your-app-name:latest
+          image: rikhendrix/react-frontend-service:latest
           ports:
             - containerPort: 80
           env:
