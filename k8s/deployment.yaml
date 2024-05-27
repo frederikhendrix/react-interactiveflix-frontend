@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: interactive-flix-frontend
+  name: react-frontend-service
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: interactive-flix-frontend
+      app: react-frontend-service
   template:
     metadata:
       labels:
-        app: interactive-flix-frontend
+        app: react-frontend-service
     spec:
       containers:
-        - name: interactive-flix-frontend
-          image: rikhendrix/interactive-flix-frontend:latest
+        - name: react-frontend-service
+          image: rikhendrix/react-frontend-service:latest
           ports:
             - containerPort: 80

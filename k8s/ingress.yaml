@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: interactive-flix-frontend-ingress
+  name: react-frontend-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: your-domain.com
+    - host: 57.153.32.53.nip.io
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: interactive-flix-frontend
+                name: react-frontend-service
                 port:
                   number: 80
