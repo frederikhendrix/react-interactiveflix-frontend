@@ -55,7 +55,7 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button type="submit">Login</button>
+        <button type="submit">Sign in</button>
       </form>
       <div className="otherLogin">
         <button onClick={handleGoogleLogin}>Login with Google</button>
