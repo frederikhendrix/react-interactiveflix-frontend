@@ -11,6 +11,7 @@ const Dashboard = () => {
       if (currentUser) {
         try {
           const token = await getIdToken(currentUser);
+          console.log(token);
           const response = await fetch("http://apigateway/get/videometa", {
             headers: {
               Authorization: `Bearer ${token}`,
