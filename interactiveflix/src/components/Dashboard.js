@@ -11,11 +11,10 @@ const Dashboard = () => {
       if (currentUser) {
         try {
           const token = await getIdToken(currentUser);
-          const response = await fetch("http://localhost:5245/get/review", {
+          const response = await fetch("http://apigateway/get/videometa", {
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
-              "X-User-Role": role,
             },
           });
 
