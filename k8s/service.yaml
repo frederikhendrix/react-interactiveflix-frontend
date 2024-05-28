@@ -4,7 +4,7 @@ metadata:
   name: react-frontend-service
 spec:
   selector:
-    app: react-frontend
+    app: react-frontend-service
   type: LoadBalancer
   ports:
     - protocol: TCP

@@ -15,6 +15,7 @@ spec:
       containers:
         - name: react-frontend-service
           image: rikhendrix/react-frontend-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:
