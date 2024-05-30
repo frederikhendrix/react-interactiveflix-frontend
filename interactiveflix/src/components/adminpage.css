@@ -1,10 +1,41 @@
 .adminpage-container{
     min-height: 100vh;
-    background-color: #000000;
+    background-color: white;
 }
 
 .Loading{
     color: white;
+}
+
+.formMetadata-variable{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap:30px;
+}
+
+.metadata-form{
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formMetadata-variable label{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; /* Adjust size as needed */
+    color: #e50914; /* Netflix Red */
+    font-weight: bold;
+}
+
+.addvideo{
+    border: 3px solid white;
+    width: 70vw;
+    min-height: 30vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
 .adminloaded-container{
@@ -20,4 +51,48 @@
     color: #e50914; /* Netflix Red */
     font-weight: bold;
     text-align: center; /* Center the text if needed */
+}
+
+.adminpage-button {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem; /* Adjust size as needed */
+    color: #e50914; /* Netflix Red */
+    font-weight: bold;
+    text-align: center; /* Center the text if needed */
+    border-radius: 5px;
+    background-color: black;
+    cursor: pointer;
+    margin: 20px;
+    padding: 10px;
+}
+
+.video-name-cool{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; /* Adjust size as needed */
+    color: #000000; /* Netflix Red */
+    font-weight: bold;
+    margin: 20px;
+    padding: 10px;
+}
+
+.container-delete-video{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.deletevideo-button{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; /* Adjust size as needed */
+    color: #e50914; /* Netflix Red */
+    font-weight: bold;
+    cursor: pointer;
+    margin: 20px;
+    padding: 10px;
+}
+
+.deletevideo-button:hover{
+    border: 4px solid black;
+    border-radius: 5px;
 }
