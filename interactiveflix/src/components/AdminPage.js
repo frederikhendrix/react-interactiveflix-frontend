@@ -49,7 +49,7 @@ const AdminPage = () => {
       }
     }
     Grabvideos();
-  }, [currentUser]);
+  }, []);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];

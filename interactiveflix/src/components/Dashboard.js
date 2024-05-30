@@ -7,19 +7,15 @@ import "./dashboard.css";
 
 const Dashboard = () => {
   const { currentUser, role } = useAuth();
-  const [userData, setUserData] = useState(null);
-  const navigate = useNavigate(); // Get the navigate function
+  const [userData, setUserData] = useState([]);
+  const [videoData, setVideoData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
       if (currentUser) {
         try {
           const token = await getIdToken(currentUser);
-
-          //currentUser.uid is a string
-          console.log(currentUser.uid);
-          //http:localhost:5245/get/videometa
-          //http://apigateway/get/videometa
           const response = await fetch("http://localhost:5245/get/videometa", {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -28,28 +24,52 @@ const Dashboard = () => {
             },
           });
 
-          const contentType = response.headers.get("content-type");
-          console.log("Response Content-Type:", contentType);
-          const responseText = await response.text();
-          console.log("Response Text:", responseText);
-
           if (!response.ok) {
             throw new Error(
-              `HTTP error status: ${response.status}, body: ${responseText}`
+              `HTTP error status: ${
+                response.status
+              }, body: ${await response.text()}`
             );
           }
 
-          if (!contentType || !contentType.includes("application/json")) {
-            console.error("Expected JSON but got:", responseText);
-            throw new TypeError("Expected JSON but got non-JSON response");
-          }
-
-          const data = JSON.parse(responseText);
-          console.log("Fetched data:", data);
+          const data = await response.json();
           setUserData(data);
+          fetchVideoUrls(data, token);
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
+      }
+    };
+
+    const fetchVideoUrls = async (videos, token) => {
+      try {
+        const videoPromises = videos.map(async (video) => {
+          const response = await fetch(
+            `http://localhost:5245/blob/${encodeURIComponent(video.videoName)}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+                "X-User-Role": role,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(
+              `HTTP error status: ${
+                response.status
+              }, body: ${await response.text()}`
+            );
+          }
+          const data = await response.json();
+          return { ...video, videoUrl: data.videoUrl };
+        });
+
+        const videosWithUrls = await Promise.all(videoPromises);
+        setVideoData(videosWithUrls);
+      } catch (error) {
+        console.error("Error fetching video URLs:", error);
       }
     };
 
@@ -57,23 +77,48 @@ const Dashboard = () => {
   }, [currentUser, role]);
 
   const handleAdminNavigation = () => {
-    navigate("/admin"); // Navigate to the Admin page
+    navigate("/admin");
+  };
+
+  const handleVideoClick = (id) => {
+    navigate(`/video/${id}`);
   };
 
   return (
     <div className="dashboard-container">
-      <SignOut />
-      <h1>Dashboard</h1>
-      {userData ? (
+      <div className="top-navbar-dashboard">
+        <SignOut />
         <div>
-          {role === "Admin" && ( // Conditionally render the Admin Page button
-            <button onClick={handleAdminNavigation}>Go to Admin Page</button>
+          {role === "Admin" && (
+            <button
+              className="gotoadmin-button"
+              onClick={handleAdminNavigation}
+            >
+              Go to Admin Page
+            </button>
           )}
-          <pre>{JSON.stringify(userData, null, 2)}</pre>
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      </div>
+      <div className="video-list">
+        {videoData.map((video) => (
+          <div
+            className="video-item"
+            key={video.id}
+            onClick={() => handleVideoClick(video.videoName)}
+          >
+            <video
+              width="320"
+              height="240"
+              controlsList="nodownload noremoteplayback"
+              className="non-interactive"
+            >
+              <source src={video.videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div className="video-title non-interactive">{video.title}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

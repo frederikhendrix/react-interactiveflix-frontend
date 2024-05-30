@@ -2,3 +2,31 @@
     background-color: #FFFFFF;
     min-height: 100vh;
 }
+
+.top-navbar-dashboard{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.gotoadmin-button{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; /* Adjust size as needed */
+    color: #e50914; /* Netflix Red */
+    background-color: #FFFFFF;
+    border: 0px solid white;
+    font-weight: bold;
+    cursor:pointer;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center; /* Center the text if needed */
+}
+
+.non-interactive {
+    pointer-events: none;
+  }
+  
+  .video-item {
+    cursor: pointer; /* Ensures the whole item looks clickable */
+  }

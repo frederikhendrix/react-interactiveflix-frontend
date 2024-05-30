@@ -6,6 +6,7 @@ import LoginPage from "./components/LoginPage";
 import Dashboard from "./components/Dashboard";
 import AdminPage from "./components/AdminPage";
 import SignUpPage from "./components/SignUpPage";
+import VideoPage from "./components/VideoPage"; // Import the VideoPage component
 
 function App() {
   return (
@@ -15,7 +16,6 @@ function App() {
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
-
             <Route
               path="/dashboard"
               element={
@@ -29,6 +29,14 @@ function App() {
               element={
                 <PrivateRoute roles={["Admin"]}>
                   <AdminPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/video/:id"
+              element={
+                <PrivateRoute roles={["User", "Admin"]}>
+                  <VideoPage />
                 </PrivateRoute>
               }
             />

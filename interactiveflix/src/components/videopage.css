@@ -1,0 +1,45 @@
+.video-page-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: black;
+}
+
+.video-container{
+    width: 100%;
+}
+
+.videostyling{
+    width: 100%;
+}
+
+.back-button-navbar{
+    display: flex;
+    align-self: flex-start;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; /* Adjust size as needed */
+    color: #e50914; /* Netflix Red */
+    font-weight: bold;
+    cursor:pointer;
+    margin: 20px;
+    padding: 10px;
+}
+
+.back-button-navbar:hover{
+    box-shadow: 0px 4px 6px 0px rgba(255, 255, 255, 0.9); /* Subtle white shadow at the bottom */
+
+}
+
+.reviews-container{
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-wrap{
+    background-color: white;
+    min-width: 30vw;
+}
