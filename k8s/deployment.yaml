@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: react-frontend-service
-          image: rikhendrix/react-frontend-service:latest
+          image: rikhendrix/react-frontend-service:latest #Zet een standaard versie hierin
           imagePullPolicy: Always
           ports:
             - containerPort: 80

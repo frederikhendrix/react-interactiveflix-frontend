@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 import { getIdToken } from "firebase/auth";
+import SignOut from "./SignOut";
+import "./dashboard.css";
 
 const Dashboard = () => {
   const { currentUser, role } = useAuth();
   const [userData, setUserData] = useState(null);
+  const navigate = useNavigate(); // Get the navigate function
 
   useEffect(() => {
     const fetchUserData = async () => {
       if (currentUser) {
         try {
           const token = await getIdToken(currentUser);
-          console.log(token);
-          const response = await fetch("http://apigateway/get/videometa", {
+
+          //currentUser.uid is a string
+          console.log(currentUser.uid);
+          //http:localhost:5245/get/videometa
+          //http://apigateway/get/videometa
+          const response = await fetch("http://localhost:5245/get/videometa", {
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
+              "X-User-Role": role,
             },
           });
 
@@ -47,11 +56,21 @@ const Dashboard = () => {
     fetchUserData();
   }, [currentUser, role]);
 
+  const handleAdminNavigation = () => {
+    navigate("/admin"); // Navigate to the Admin page
+  };
+
   return (
-    <div>
+    <div className="dashboard-container">
+      <SignOut />
       <h1>Dashboard</h1>
       {userData ? (
-        <pre>{JSON.stringify(userData, null, 2)}</pre>
+        <div>
+          {role === "Admin" && ( // Conditionally render the Admin Page button
+            <button onClick={handleAdminNavigation}>Go to Admin Page</button>
+          )}
+          <pre>{JSON.stringify(userData, null, 2)}</pre>
+        </div>
       ) : (
         <p>Loading...</p>
       )}

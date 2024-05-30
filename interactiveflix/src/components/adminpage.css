@@ -1,0 +1,23 @@
+.adminpage-container{
+    min-height: 100vh;
+    background-color: #000000;
+}
+
+.Loading{
+    color: white;
+}
+
+.adminloaded-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.adminpage-title{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem; /* Adjust size as needed */
+    color: #e50914; /* Netflix Red */
+    font-weight: bold;
+    text-align: center; /* Center the text if needed */
+}

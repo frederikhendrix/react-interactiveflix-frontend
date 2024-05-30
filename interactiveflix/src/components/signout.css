@@ -1,0 +1,12 @@
+.signout-button{
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 2rem; /* Adjust size as needed */
+        color: #e50914; /* Netflix Red */
+        background-color: #FFFFFF;
+        border: 0px solid white;
+        font-weight: bold;
+        cursor:pointer;
+        border-radius: 5px;
+        margin: 10px;
+        text-align: center; /* Center the text if needed */
+}
