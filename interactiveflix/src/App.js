@@ -6,7 +6,7 @@ import LoginPage from "./components/LoginPage";
 import Dashboard from "./components/Dashboard";
 import AdminPage from "./components/AdminPage";
 import SignUpPage from "./components/SignUpPage";
-import VideoPage from "./components/VideoPage"; // Import the VideoPage component
+import VideoPage from "./components/VideoPage";
 
 function App() {
   return (
