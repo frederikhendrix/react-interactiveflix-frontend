@@ -17,7 +17,7 @@ spec:
           image: rikhendrix/react-frontend-service:latest #Zet een standaard versie hierin
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 3000
           env:
             - name: REACT_APP_FIREBASE_API_KEY
               valueFrom:

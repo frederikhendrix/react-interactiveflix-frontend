@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: 57.153.32.53.nip.io
+    - host: 98.64.8.187
       http:
         paths:
           - path: /
@@ -15,4 +15,4 @@ spec:
               service:
                 name: react-frontend-service
                 port:
-                  number: 80
+                  number: 3000
