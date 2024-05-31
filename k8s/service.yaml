@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: react-frontend-service
 spec:
+  type: LoadBalancer
   selector:
     app: react-frontend-service
-  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 80
