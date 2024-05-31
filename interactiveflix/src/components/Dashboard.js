@@ -80,8 +80,8 @@ const Dashboard = () => {
     navigate("/admin");
   };
 
-  const handleVideoClick = (id) => {
-    navigate(`/video/${id}`);
+  const handleVideoClick = (id, videoName) => {
+    navigate(`/video/${id}/${videoName}`);
   };
 
   return (
@@ -99,12 +99,13 @@ const Dashboard = () => {
           )}
         </div>
       </div>
+      <div className="moviesyoumightlike-button">Movies You Might Like</div>
       <div className="video-list">
         {videoData.map((video) => (
           <div
             className="video-item"
             key={video.id}
-            onClick={() => handleVideoClick(video.videoName)}
+            onClick={() => handleVideoClick(video.id, video.videoName)}
           >
             <video
               width="320"

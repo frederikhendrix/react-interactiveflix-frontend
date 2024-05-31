@@ -33,7 +33,7 @@ function App() {
               }
             />
             <Route
-              path="/video/:id"
+              path="/video/:id/:videoName"
               element={
                 <PrivateRoute roles={["User", "Admin"]}>
                   <VideoPage />

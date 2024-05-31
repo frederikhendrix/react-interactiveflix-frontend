@@ -14,6 +14,14 @@
     width: 100%;
 }
 
+.form-review{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
 .back-button-navbar{
     display: flex;
     align-self: flex-start;
@@ -26,20 +34,46 @@
     padding: 10px;
 }
 
-.back-button-navbar:hover{
-    box-shadow: 0px 4px 6px 0px rgba(255, 255, 255, 0.9); /* Subtle white shadow at the bottom */
+.submit-button-review{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; /* Adjust size as needed */
+    color: #e50914; /* Netflix Red */
+    background-color: black;
+    border: 2px solid black;
+    font-weight: bold;
+    cursor:pointer;
+    margin: 20px;
+    padding: 10px;
+}
 
+.submit-button-review:hover{
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.text-form{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; /* Adjust size as needed */
+    color: #e50914; /* Netflix Red */
+    text-align: center;
+    font-weight: bold;
+    margin: 20px;
+    padding: 10px;
 }
 
 .reviews-container{
     min-height: 30vh;
     display: flex;
+    background-color: white;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 20px;
 }
 
 .review-wrap{
     background-color: white;
     min-width: 30vw;
+    border: 2px solid black;
+    padding: 10px;
 }

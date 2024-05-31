@@ -1,5 +1,5 @@
 .dashboard-container{
-    background-color: #FFFFFF;
+    background-color: black;
     min-height: 100vh;
 }
 
@@ -26,7 +26,33 @@
 .non-interactive {
     pointer-events: none;
   }
-  
+
+.moviesyoumightlike-button{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; /* Adjust size as needed */
+    color: #e50914; /* Netflix Red */
+    border: 0px solid white;
+    font-weight: bold;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center; /* Center the text if needed */
+}
+
+  .video-list{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+
+  }
+
+.video-title{
+    color: white;
+}
   .video-item {
     cursor: pointer; /* Ensures the whole item looks clickable */
-  }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 320px;
+}
