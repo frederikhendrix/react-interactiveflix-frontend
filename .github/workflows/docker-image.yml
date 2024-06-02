@@ -13,6 +13,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run Cypress tests
+        run: npx cypress run --env react=${{ secrets.REACT_PASSWORD }}
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -37,8 +54,7 @@ jobs:
         run: |
           docker tag react-frontend-service:latest ${{ secrets.DOCKERHUB_USERNAME }}/react-frontend-service:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/react-frontend-service:latest
-          
-      # Steps for deploying to AKS
+
       - name: Set up Azure CLI
         uses: azure/setup-kubectl@v1
         with:
@@ -72,3 +88,44 @@ jobs:
       - name: Force rollout restart
         run: |
           kubectl rollout restart deployment react-frontend-service
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run npm audit
+        run: npm audit --audit-level=high
+
+      - name: Run OWASP ZAP
+        run: docker run -t owasp/zap2docker-stable zap-full-scan.py -t http://localhost:3000 -r zap_report.html
+
+      - name: Upload OWASP ZAP report
+        uses: actions/upload-artifact@v2
+        with:
+          name: zap-report
+          path: zap_report.html
+
+  api-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run API tests
+        run: newman run path/to/your-collection.json -e path/to/your-environment.json
