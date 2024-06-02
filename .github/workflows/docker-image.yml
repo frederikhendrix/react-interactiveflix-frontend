@@ -16,19 +16,26 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '20'
+
+      - name: Change directory to /interactiveflix
+        run: cd interactiveflix
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./interactiveflix
 
       - name: Run ESLint
         run: npm run lint
+        working-directory: ./interactiveflix
 
       - name: Run tests
         run: npm test
+        working-directory: ./interactiveflix
 
       - name: Run Cypress tests
         run: npx cypress run --env react=${{ secrets.REACT_PASSWORD }}
+        working-directory: ./interactiveflix
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -97,13 +104,18 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '20'
+          
+      - name: Change directory to /interactiveflix
+        run: cd interactiveflix
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./interactiveflix
 
       - name: Run npm audit
         run: npm audit --audit-level=high
+        working-directory: ./interactiveflix
 
       - name: Run OWASP ZAP
         run: docker run -t owasp/zap2docker-stable zap-full-scan.py -t http://localhost:3000 -r zap_report.html
