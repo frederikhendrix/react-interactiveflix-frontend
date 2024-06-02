@@ -16,6 +16,8 @@ const Dashboard = () => {
       if (currentUser) {
         try {
           const token = await getIdToken(currentUser);
+          console.log(token);
+          console.log(role);
           const response = await fetch("http://localhost:5245/get/videometa", {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -104,6 +106,7 @@ const Dashboard = () => {
         {videoData.map((video) => (
           <div
             className="video-item"
+            name="videoClick"
             key={video.id}
             onClick={() => handleVideoClick(video.id, video.videoName)}
           >
