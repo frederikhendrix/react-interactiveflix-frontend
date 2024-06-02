@@ -135,7 +135,7 @@ jobs:
           docker run -d -p 3000:80 --name react-frontend-service ${{ secrets.DOCKERHUB_USERNAME }}/react-frontend-service:latest
 
       - name: Run OWASP ZAP
-        run: docker run -t owasp/zap2docker-stable zap-full-scan.py -t http://host.docker.internal:3000 -r zap_report.html
+        run: docker run -v $(pwd):/zap/wrk/:rw -t zaproxy/zap-stable zap-full-scan.py -t http://localhost:3000 -r zap_report.html
         continue-on-error: true
 
       - name: Upload OWASP ZAP report
