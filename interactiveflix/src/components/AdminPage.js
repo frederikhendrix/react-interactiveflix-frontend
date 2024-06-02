@@ -5,7 +5,6 @@ import "./adminpage.css";
 
 const AdminPage = () => {
   const { currentUser, role } = useAuth();
-  const [adminData, setAdminData] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFileURL, setSelectedFileURL] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("");

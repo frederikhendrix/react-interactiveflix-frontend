@@ -10,7 +10,6 @@ const VideoPage = () => {
   const { id, videoName } = useParams();
   const { currentUser, role } = useAuth();
   const [videoUrl, setVideoUrl] = useState("");
-  const [videoTitle, setVideoTitle] = useState("");
   const [reviewText, setReviewText] = useState("");
   const [reviewScore, setReviewScore] = useState(0);
   const [reviews, setReviews] = useState([]);
@@ -61,7 +60,6 @@ const VideoPage = () => {
 
           const data = await response.json();
           setVideoUrl(data.videoUrl);
-          setVideoTitle(data.title);
         } catch (error) {
           console.error("Error fetching video data:", error);
         }

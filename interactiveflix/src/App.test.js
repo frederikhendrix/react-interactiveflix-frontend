@@ -1,7 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react"; // Import React
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect"; // Import Jest matchers
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders learn react link", () => {
   render(<App />);
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();

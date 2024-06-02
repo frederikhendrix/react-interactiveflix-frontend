@@ -7,7 +7,6 @@ import "./dashboard.css";
 
 const Dashboard = () => {
   const { currentUser, role } = useAuth();
-  const [userData, setUserData] = useState([]);
   const [videoData, setVideoData] = useState([]);
   const navigate = useNavigate();
 
@@ -35,7 +34,6 @@ const Dashboard = () => {
           }
 
           const data = await response.json();
-          setUserData(data);
           fetchVideoUrls(data, token);
         } catch (error) {
           console.error("Error fetching user data:", error);
