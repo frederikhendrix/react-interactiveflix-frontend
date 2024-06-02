@@ -123,8 +123,19 @@ jobs:
         working-directory: ./interactiveflix
         continue-on-error: true
 
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Pull and run Docker container
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/react-frontend-service:latest
+          docker run -d -p 3000:80 --name react-frontend-service ${{ secrets.DOCKERHUB_USERNAME }}/react-frontend-service:latest
+
       - name: Run OWASP ZAP
-        run: docker run -t owasp/zap2docker-stable zap-full-scan.py -t http://localhost:3000 -r zap_report.html
+        run: docker run -t owasp/zap2docker-stable zap-full-scan.py -t http://host.docker.internal:3000 -r zap_report.html
         continue-on-error: true
 
       - name: Upload OWASP ZAP report
