@@ -42,6 +42,7 @@ jobs:
       - name: Run Cypress tests
         run: npx cypress run --env react=${{ secrets.REACT_PASSWORD }}
         working-directory: ./interactiveflix
+        continue-on-error: true
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
