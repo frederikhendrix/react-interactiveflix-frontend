@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import { getIdToken } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import "./adminpage.css";
 
 const AdminPage = () => {
@@ -9,6 +10,8 @@ const AdminPage = () => {
   const [selectedFileURL, setSelectedFileURL] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("");
   const [retrievedVideos, setRetrievedVideos] = useState([]);
+  const navigate = useNavigate();
+
   const [metadata, setMetadata] = useState({
     title: "",
     description: "",
@@ -198,10 +201,17 @@ const AdminPage = () => {
     }
   };
 
+  const handleNavigateBack = () => {
+    navigate(`/dashboard`);
+  };
+
   return (
     <div className="adminpage-container">
       {currentUser ? (
         <div className="adminloaded-container">
+          <div className="back-button-navbar" onClick={handleNavigateBack}>
+            Back
+          </div>
           <div className="adminpage-title">
             Admin Dashboard Upload or Delete Videos
           </div>
