@@ -12,7 +12,6 @@ describe("Dashboard Test", () => {
   });
 
   it("should display the movie Borthers (2009)", () => {
-    cy.visit("http://108.142.96.145/dashboard");
     cy.intercept("GET", "**/get/videometa").as("getVideos");
     cy.wait("@getVideos");
     cy.log("Waiting for video items to be loaded");
