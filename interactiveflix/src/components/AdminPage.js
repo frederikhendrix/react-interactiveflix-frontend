@@ -31,7 +31,7 @@ const AdminPage = () => {
         const token = await getIdToken(currentUser);
 
         const videosResponse = await fetch(
-          "http://localhost:5245/get/videometa",
+          "http://108.142.103.240/get/videometa",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ const AdminPage = () => {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      const response = await fetch("http://localhost:5245/blob/upload", {
+      const response = await fetch("http://108.142.103.240/blob/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -116,7 +116,7 @@ const AdminPage = () => {
     event.preventDefault();
     try {
       const token = await getIdToken(currentUser);
-      const response = await fetch("http://localhost:5245/post/videometa", {
+      const response = await fetch("http://108.142.103.240/post/videometa", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -128,7 +128,7 @@ const AdminPage = () => {
 
       if (response.ok) {
         const videosResponse = await fetch(
-          "http://localhost:5245/get/videometa",
+          "http://108.142.103.240/get/videometa",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -154,7 +154,7 @@ const AdminPage = () => {
       const token = await getIdToken(currentUser);
 
       // Delete video metadata
-      await fetch(`http://localhost:5245/videometa/${videoId}`, {
+      await fetch(`http://108.142.103.240/videometa/${videoId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -164,7 +164,7 @@ const AdminPage = () => {
       });
 
       // Delete video blob
-      await fetch("http://localhost:5245/blob/delete", {
+      await fetch("http://108.142.103.240/blob/delete", {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -181,7 +181,7 @@ const AdminPage = () => {
 
       // Refresh the video list
       const videosResponse = await fetch(
-        "http://localhost:5245/get/videometa",
+        "http://108.142.103.240/get/videometa",
         {
           headers: {
             Authorization: `Bearer ${token}`,

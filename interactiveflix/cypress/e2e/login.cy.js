@@ -1,7 +1,7 @@
 describe("Dashboard Test", () => {
   before(() => {
     cy.log("Visiting login page");
-    cy.visit("http://localhost:3000/");
+    cy.visit("http://108.142.96.145/");
     cy.log("Typing email");
     cy.get('input[name="email"]').type("rikhendrix@live.nl");
     cy.log("Typing password");
@@ -12,7 +12,7 @@ describe("Dashboard Test", () => {
   });
 
   it("should display the movie Borthers (2009)", () => {
-    cy.visit("http://localhost:3000/dashboard");
+    cy.visit("http://108.142.96.145/dashboard");
     cy.intercept("GET", "**/get/videometa").as("getVideos");
     cy.wait("@getVideos");
     cy.log("Waiting for video items to be loaded");
