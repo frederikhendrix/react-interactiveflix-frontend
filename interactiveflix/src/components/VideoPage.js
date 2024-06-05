@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getIdToken } from "firebase/auth";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 import "./videopage.css";
 
@@ -76,7 +77,7 @@ const VideoPage = () => {
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
-
+    const sanitizedReviewText = DOMPurify.sanitize(reviewText);
     try {
       const token = await getIdToken(currentUser);
       const response = await fetch(`http://localhost:5245/post/review`, {
@@ -89,7 +90,7 @@ const VideoPage = () => {
         body: JSON.stringify({
           UserId: currentUser.uid,
           MovieId: id,
-          Text: reviewText,
+          Text: sanitizedReviewText,
           Score: reviewScore,
           IsVisible: true,
           ReviewedById: id,
