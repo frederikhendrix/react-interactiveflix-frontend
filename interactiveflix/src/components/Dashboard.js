@@ -17,7 +17,7 @@ const Dashboard = () => {
           const token = await getIdToken(currentUser);
           console.log(token);
           console.log(role);
-          const response = await fetch("http://localhost:5245/get/videometa", {
+          const response = await fetch("http://108.142.103.240/get/videometa", {
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
@@ -45,7 +45,9 @@ const Dashboard = () => {
       try {
         const videoPromises = videos.map(async (video) => {
           const response = await fetch(
-            `http://localhost:5245/blob/${encodeURIComponent(video.videoName)}`,
+            `http://108.142.103.240/blob/${encodeURIComponent(
+              video.videoName
+            )}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
