@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Define PropTypes for the component
+// Define PropTypes for the component.
 AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
