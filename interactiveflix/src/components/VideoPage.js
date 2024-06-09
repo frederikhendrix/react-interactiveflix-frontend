@@ -20,16 +20,13 @@ const VideoPage = () => {
     if (currentUser) {
       try {
         const token = await getIdToken(currentUser);
-        const response = await fetch(
-          `http://108.142.103.240/get/review/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-              "X-User-Role": role,
-            },
-          }
-        );
+        const response = await fetch(`http://98.64.211.187/get/review/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "X-User-Role": role,
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();
@@ -47,7 +44,7 @@ const VideoPage = () => {
         try {
           const token = await getIdToken(currentUser);
           const response = await fetch(
-            `http://108.142.103.240/blob/${videoName}`,
+            `http://98.64.211.187/blob/${videoName}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -83,7 +80,7 @@ const VideoPage = () => {
     const sanitizedReviewText = DOMPurify.sanitize(reviewText);
     try {
       const token = await getIdToken(currentUser);
-      const response = await fetch(`http://108.142.103.240/post/review`, {
+      const response = await fetch(`http://98.64.211.187/post/review`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -117,7 +114,7 @@ const VideoPage = () => {
     try {
       const token = await getIdToken(currentUser);
       const response = await fetch(
-        `http://108.142.103.240/get/review/${reviewId}`,
+        `http://98.64.211.187/get/review/${reviewId}`,
         {
           method: "DELETE",
           headers: {
