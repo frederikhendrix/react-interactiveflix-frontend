@@ -3,6 +3,7 @@ import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import { getIdToken } from "firebase/auth";
 import SignOut from "./SignOut";
+import CryptoJS from "crypto-js";
 import "./dashboard.css";
 
 const Dashboard = () => {
@@ -10,21 +11,32 @@ const Dashboard = () => {
   const [videoData, setVideoData] = useState([]);
   const navigate = useNavigate();
 
+  const key = CryptoJS.enc.Base64.parse("bXlzZWNyZXRrZXkxMjM0NQ==");
+  const iv = CryptoJS.enc.Base64.parse("bXlzZWNyZXRpdjEyMzQ1Ng==");
+
+  const encrypt = (text) => {
+    return CryptoJS.AES.encrypt(text, key, { iv: iv }).toString();
+  };
+
+  const decrypt = (cipherText) => {
+    const bytes = CryptoJS.AES.decrypt(cipherText, key, { iv: iv });
+    return bytes.toString(CryptoJS.enc.Utf8);
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       if (currentUser) {
         try {
           const token = await getIdToken(currentUser);
-          console.log(token);
-          console.log(role);
-          const response = await fetch("http://98.64.211.187/get/videometa", {
+
+          const response = await fetch("http://57.153.88.218/get/videometa", {
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
               "X-User-Role": role,
             },
           });
-          console.log(response);
+
           if (!response.ok) {
             throw new Error(
               `HTTP error status: ${
@@ -44,8 +56,12 @@ const Dashboard = () => {
     const fetchVideoUrls = async (videos, token) => {
       try {
         const videoPromises = videos.map(async (video) => {
+          const encryptedVideoName = encodeURIComponent(
+            encrypt(video.videoName)
+          );
+
           const response = await fetch(
-            `http://98.64.211.187/blob/${encodeURIComponent(video.videoName)}`,
+            `http://57.153.88.218/blob/${video.videoName}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -62,7 +78,9 @@ const Dashboard = () => {
               }, body: ${await response.text()}`
             );
           }
+
           const data = await response.json();
+          //const decryptedVideoUrl = decrypt(data.videoUrl);
           return { ...video, videoUrl: data.videoUrl };
         });
 
@@ -84,40 +102,32 @@ const Dashboard = () => {
     navigate(`/video/${id}/${videoName}`);
   };
 
+  const handleProfilePageNav = () => {
+    navigate("/profile");
+  };
+
   return (
     <div className="dashboard-container">
       <div className="top-navbar-dashboard">
         <SignOut />
-        <div>
-          {role === "Admin" && (
-            <button
-              className="gotoadmin-button"
-              onClick={handleAdminNavigation}
-            >
-              Go to Admin Page
-            </button>
-          )}
-        </div>
+        {role === "Admin" && (
+          <button onClick={handleAdminNavigation}>Go to Admin Page</button>
+        )}
+        <button onClick={handleProfilePageNav}>Profile Page</button>
       </div>
       <div className="moviesyoumightlike-button">Movies You Might Like</div>
       <div className="video-list">
         {videoData.map((video) => (
           <div
             className="video-item"
-            name="videoClick"
             key={video.id}
             onClick={() => handleVideoClick(video.id, video.videoName)}
           >
-            <video
-              width="320"
-              height="240"
-              controlsList="nodownload noremoteplayback"
-              className="non-interactive"
-            >
+            <video width="320" height="240" controlsList="nodownload">
               <source src={video.videoUrl} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <div className="video-title non-interactive">{video.title}</div>
+            <div className="video-title">{video.title}</div>
           </div>
         ))}
       </div>

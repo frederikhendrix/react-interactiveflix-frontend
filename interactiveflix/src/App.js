@@ -1,5 +1,10 @@
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import { AuthProvider } from "./components/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import LoginPage from "./components/LoginPage";
@@ -7,6 +12,7 @@ import Dashboard from "./components/Dashboard";
 import AdminPage from "./components/AdminPage";
 import SignUpPage from "./components/SignUpPage";
 import VideoPage from "./components/VideoPage";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   return (
@@ -40,6 +46,15 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute roles={["User", "Admin"]}>
+                  <ProfilePage />
+                </PrivateRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>
       </Suspense>
