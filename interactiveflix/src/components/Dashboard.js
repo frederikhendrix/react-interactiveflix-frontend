@@ -3,7 +3,7 @@ import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import { getIdToken } from "firebase/auth";
 import SignOut from "./SignOut";
-import CryptoJS from "crypto-js";
+// import CryptoJS from "crypto-js";
 import "./dashboard.css";
 
 const Dashboard = () => {
@@ -11,17 +11,17 @@ const Dashboard = () => {
   const [videoData, setVideoData] = useState([]);
   const navigate = useNavigate();
 
-  const key = CryptoJS.enc.Base64.parse("bXlzZWNyZXRrZXkxMjM0NQ==");
-  const iv = CryptoJS.enc.Base64.parse("bXlzZWNyZXRpdjEyMzQ1Ng==");
+  // const key = CryptoJS.enc.Base64.parse("bXlzZWNyZXRrZXkxMjM0NQ==");
+  // const iv = CryptoJS.enc.Base64.parse("bXlzZWNyZXRpdjEyMzQ1Ng==");
 
-  const encrypt = (text) => {
-    return CryptoJS.AES.encrypt(text, key, { iv: iv }).toString();
-  };
+  // const encrypt = (text) => {
+  //   return CryptoJS.AES.encrypt(text, key, { iv: iv }).toString();
+  // };
 
-  const decrypt = (cipherText) => {
-    const bytes = CryptoJS.AES.decrypt(cipherText, key, { iv: iv });
-    return bytes.toString(CryptoJS.enc.Utf8);
-  };
+  // const decrypt = (cipherText) => {
+  //   const bytes = CryptoJS.AES.decrypt(cipherText, key, { iv: iv });
+  //   return bytes.toString(CryptoJS.enc.Utf8);
+  // };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -56,9 +56,9 @@ const Dashboard = () => {
     const fetchVideoUrls = async (videos, token) => {
       try {
         const videoPromises = videos.map(async (video) => {
-          const encryptedVideoName = encodeURIComponent(
-            encrypt(video.videoName)
-          );
+          // const encryptedVideoName = encodeURIComponent(
+          //   encrypt(video.videoName)
+          // );
 
           const response = await fetch(
             `http://57.153.88.218/blob/${video.videoName}`,
