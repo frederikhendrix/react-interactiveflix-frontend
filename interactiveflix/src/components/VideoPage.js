@@ -44,6 +44,7 @@ const VideoPage = () => {
       if (currentUser) {
         try {
           const token = await getIdToken(currentUser);
+          console.log(token);
           const response = await fetch(
             `http://57.153.128.195/blob/${videoName}`,
             {
