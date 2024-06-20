@@ -29,7 +29,7 @@ const ProfilePage = () => {
         const token = await getIdToken(currentUser);
         const movieDataPromises = reviews.map(async (review) => {
           const response = await fetch(
-            `http://57.153.88.218/videometa/${review.movieId}`,
+            `http://57.153.128.195/videometa/${review.movieId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ const ProfilePage = () => {
           const userId = currentUser.uid;
           const token = await getIdToken(currentUser);
           const response = await fetch(
-            `http://57.153.88.218/get/reviews/${userId}`,
+            `http://57.153.128.195/get/reviews/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

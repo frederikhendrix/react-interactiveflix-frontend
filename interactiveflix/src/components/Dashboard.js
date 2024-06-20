@@ -29,7 +29,7 @@ const Dashboard = () => {
         try {
           const token = await getIdToken(currentUser);
 
-          const response = await fetch("http://57.153.88.218/get/videometa", {
+          const response = await fetch("http://57.153.128.195/get/videometa", {
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const Dashboard = () => {
           // );
 
           const response = await fetch(
-            `http://57.153.88.218/blob/${video.videoName}`,
+            `http://57.153.128.195/blob/${video.videoName}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

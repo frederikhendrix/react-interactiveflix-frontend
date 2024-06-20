@@ -20,7 +20,7 @@ const VideoPage = () => {
     if (currentUser) {
       try {
         const token = await getIdToken(currentUser);
-        const response = await fetch(`http://57.153.88.218/get/review/${id}`, {
+        const response = await fetch(`http://57.153.128.195/get/review/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const VideoPage = () => {
         try {
           const token = await getIdToken(currentUser);
           const response = await fetch(
-            `http://57.153.88.218/blob/${videoName}`,
+            `http://57.153.128.195/blob/${videoName}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -81,7 +81,7 @@ const VideoPage = () => {
     const sanitizedReviewText = DOMPurify.sanitize(reviewText);
     try {
       const token = await getIdToken(currentUser);
-      const response = await fetch(`http://57.153.88.218/post/review`, {
+      const response = await fetch(`http://57.153.128.195/post/review`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -115,7 +115,7 @@ const VideoPage = () => {
     try {
       const token = await getIdToken(currentUser);
       const response = await fetch(
-        `http://57.153.88.218/get/review/${reviewId}`,
+        `http://57.153.128.195/get/review/${reviewId}`,
         {
           method: "DELETE",
           headers: {

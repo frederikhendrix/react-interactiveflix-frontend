@@ -34,7 +34,7 @@ const AdminPage = () => {
         const token = await getIdToken(currentUser);
 
         const videosResponse = await fetch(
-          "http://57.153.88.218/get/videometa",
+          "http://57.153.128.195/get/videometa",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ const AdminPage = () => {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      const response = await fetch("http://57.153.88.218/blob/upload", {
+      const response = await fetch("http://57.153.128.195/blob/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -119,7 +119,7 @@ const AdminPage = () => {
     event.preventDefault();
     try {
       const token = await getIdToken(currentUser);
-      const response = await fetch("http://57.153.88.218/post/videometa", {
+      const response = await fetch("http://57.153.128.195/post/videometa", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -131,7 +131,7 @@ const AdminPage = () => {
 
       if (response.ok) {
         const videosResponse = await fetch(
-          "http://57.153.88.218/get/videometa",
+          "http://57.153.128.195/get/videometa",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -157,7 +157,7 @@ const AdminPage = () => {
       const token = await getIdToken(currentUser);
 
       // Delete video metadata
-      await fetch(`http://57.153.88.218/videometa/${videoId}`, {
+      await fetch(`http://57.153.128.195/videometa/${videoId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -167,7 +167,7 @@ const AdminPage = () => {
       });
 
       // Delete video blob
-      await fetch("http://57.153.88.218/blob/delete", {
+      await fetch("http://57.153.128.195/blob/delete", {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -183,13 +183,16 @@ const AdminPage = () => {
       setUploadStatus("Video deleted successfully!");
 
       // Refresh the video list
-      const videosResponse = await fetch("http://57.153.88.218/get/videometa", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-          "X-User-Role": role,
-        },
-      });
+      const videosResponse = await fetch(
+        "http://57.153.128.195/get/videometa",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "X-User-Role": role,
+          },
+        }
+      );
       const videos = await videosResponse.json();
       setRetrievedVideos(videos);
     } catch (error) {
