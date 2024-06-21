@@ -3,8 +3,16 @@ import { useAuth } from "./AuthContext";
 import { deleteUser, getIdToken } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./profilepage.css";
+import Modal from "react-modal";
+import PrivacyPolicy from "./PrivacyPolicy";
+
+Modal.setAppElement("#root"); // Add this line for accessibility
 
 const ProfilePage = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
   const { currentUser, role } = useAuth();
   const [reviews, setReviews] = useState([]);
   const navigate = useNavigate();
@@ -99,6 +107,8 @@ const ProfilePage = () => {
       <div className="profile-header">
         <h1>Profile Information</h1>
       </div>
+      <button onClick={openModal}>Privacy Policy</button>
+      <PrivacyPolicy isOpen={modalIsOpen} onRequestClose={closeModal} />
       <div className="profile-details">
         <p>
           <strong>Email:</strong> {currentUser.email}
